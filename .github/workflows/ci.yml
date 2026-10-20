@@ -1,0 +1,108 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+env:
+  TORCH_INDEX: https://download.pytorch.org/whl/cpu
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install torch --index-url "$TORCH_INDEX" && pip install -e ".[dev]"
+      - run: .github/run.sh ruff check --output-format=full src tests
+      - run: .github/run.sh ruff format --check --diff src tests
+      - run: .github/run.sh pytest -q -p no:warnings
+
+  pipeline:
+    # The whole pipeline on real M5 data for one store: backtest of every model, release gate,
+    # replenishment simulation, censored-demand experiment, monitoring, registry and reports.
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install torch --index-url "$TORCH_INDEX" && pip install -e .
+      - uses: actions/cache@v4
+        with:
+          path: data/m5
+          key: m5-v1
+      - run: .github/run.sh dre download
+      - run: .github/run.sh dre run --fast --stores CA_1 --out out
+      - name: Summary
+        run: |
+          python - <<'PY' >> "$GITHUB_STEP_SUMMARY"
+          import json
+          r = json.load(open("out/reports/report.json"))
+          print(f"Champion: **{r['champion']}** (one store, fast settings)\n")
+          print("| model | WRMSSE | WSPL | bias |\n|---|---|---|---|")
+          for n, v in sorted(r["backtest"].items(), key=lambda kv: kv[1]["wrmsse"]):
+              print(f"| {n} | {v['wrmsse']} | {v['wspl']} | {v['bias']} |")
+          print("\n| policy | fill rate | waste / COGS | margin after waste |\n|---|---|---|---|")
+          for n, v in r["replenishment"]["policies"].items():
+              a = v["all"]
+              print(f"| {n} | {a['fill_rate']} | {a['waste_share_of_cogs']} | {a['margin_after_waste']} |")
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: run-ca1
+          path: |
+            out/reports
+            out/registry
+          retention-days: 14
+
+  docker:
+    needs: pipeline
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: run-ca1
+          path: out
+      - run: docker build -t dre:ci .
+      - name: Serve the registry from the pipeline run and call the API
+        run: |
+          docker run -d --name dre -p 8080:8080 -v "$PWD/out/registry:/registry:ro" dre:ci
+          for i in $(seq 1 30); do curl -sf localhost:8080/health && break; sleep 1; done
+          curl -sf localhost:8080/health | tee health.json
+          python3 - <<'PY'
+          import json, urllib.request, datetime
+          h = json.load(open("health.json"))
+          first = datetime.date.fromisoformat(h["forecast_days"][0])
+          body = {"store_id": "CA_1", "date": str(first - datetime.timedelta(days=1)), "stock": []}
+          req = urllib.request.Request("http://localhost:8080/v1/orders", json.dumps(body).encode(), {"Content-Type": "application/json"})
+          out = json.load(urllib.request.urlopen(req))
+          assert out["orders"], out
+          print(len(out["orders"]), "orders;", out["orders"][0]["explanation"])
+          PY
+      - if: failure()
+        run: docker logs dre
+
+  terraform:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: infra/gcp
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+      - run: terraform fmt -check -diff -recursive
+      - run: terraform init -backend=false
+      - run: terraform validate

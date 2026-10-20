@@ -1,0 +1,65 @@
+# dmart-replenishment-engine configuration. Forecasting setup, evaluation folds, the release-gate
+# rules and every economic assumption of the replenishment simulation live here, reviewed like code.
+
+data:
+  root: data/m5
+  cache: data/cache
+  category: FOODS            # grocery: the closest public analogue to a dark-store assortment
+  stores: null               # null = all 10 stores; e.g. [CA_1] for a quick run
+
+forecast:
+  horizon: 28
+  # Rolling-origin backtest (0-based index of the last observed day). d_1941 is the last day of
+  # the M5 training data; the fold at 1940 forecasts the M5 evaluation period d_1942–d_1969.
+  warmup_origin: 1856
+  folds: [1884, 1912, 1940]
+  stockouts:
+    window: 56
+    alpha: 0.001
+    min_run: 3
+    max_run: 14              # longer gaps are delisting/replacement, not lost demand
+  models:
+    seasonal_naive: {kind: seasonal_naive}
+    moving_average: {kind: moving_average}
+    tsb: {kind: tsb}
+    lightgbm_demand: {kind: lightgbm, n_origins: 26, origin_step: 14, fraction: 0.5, censored: mask, params: {n_estimators: 400}}
+    torch_nb: {kind: torch, n_origins: 26, origin_step: 14, fraction: 0.5, censored: keep, epochs: 2}
+    torch_nb_demand: {kind: torch, n_origins: 26, origin_step: 14, fraction: 0.5, censored: mask, epochs: 2}
+  champion: moving_average     # what production runs today; challengers must pass the gate
+
+gate:
+  max_wspl_regression: 0.01    # WSPL may not get worse by more than 1%
+  max_bias_regression: 0.01    # |bias| may not get worse by more than 1 percentage point
+  min_fold_wins: 2             # must win at least 2 of the 3 folds
+
+economics:
+  gross_margin: 0.30           # unit cost = 70% of the shelf price
+  holding_rate_per_day: 0.001  # capital + space cost per day, as a share of unit cost
+  capacity_days_of_sales: 10   # shelf space per item: 10 days of recent sales …
+  capacity_min_packs: 2        # … but at least two cases
+  zone_of_department:          # M5 departments are anonymised; they stand in for temperature zones
+    fresh: [FOODS_1]
+    chilled: [FOODS_2]
+    ambient: [FOODS_3]
+  zones:
+    fresh:   {shelf_life_days: 4,  delivery_weekdays: [0, 1, 2, 3, 4, 5, 6]}
+    chilled: {shelf_life_days: 10, delivery_weekdays: [0, 2, 4]}
+    ambient: {shelf_life_days: 60, delivery_weekdays: [0, 3]}
+
+replenishment:
+  start_origin: 1940           # simulate the M5 evaluation month on its real daily demand
+  days: 28
+  init_days_of_stock: 2
+  stockout_penalty_share: 0.2  # goodwill cost of an empty shelf, as a share of price (customer may churn)
+  penalty_sensitivity: [0.6]   # the same policy when availability is valued higher (a business decision)
+  min_service: 0.5
+  max_service: 0.98
+  cover_days_safety: 2         # the heuristic: recent average x (days to next delivery + 2)
+  capital_caps_days: [3, 4]    # store-level inventory capital cap, in days of cost of goods sold
+
+censoring_experiment:
+  store: CA_3                  # largest store: planted stock-outs on top of real data
+  share_of_days: 0.08          # share of item-days hit by a planted stock-out episode
+  min_rate: 1.0                # only items selling at least 1 unit a day on average
+  n_origins: 12
+  params: {n_estimators: 300}
