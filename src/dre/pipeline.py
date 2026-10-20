@@ -254,4 +254,3 @@ def _json(o):
     if isinstance(o, np.bool_):
         return bool(o)
     return str(o)
-
