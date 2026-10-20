@@ -29,8 +29,14 @@ is recomputed per backtest origin from data up to that origin (`pipeline.feature
 Recorded sales are censored by stock-outs. Zero runs that are improbable given the item's recent
 selling rate are flagged (`src/dre/data/stockouts.py`). Long gaps (over 14 days) are treated as
 delisting, not lost demand. Whether to mask flagged days from training targets is a modelling
-choice that **must be justified with the controlled experiment** (`evaluation/censoring.py`), not
-assumed. Masking every flagged run over-forecast by 7% in our backtest.
+choice that must be justified with evidence, not assumed. Two pieces of evidence count:
+- **Planted stock-outs** (`evaluation/censoring.py`). With known truth, masking removed the bias that
+  stock-outs put into the forecast.
+- **The release gate on real history.** On M5, masking short stock-outs made no measurable
+  difference, so it was rejected.
+
+During development, masking every flagged run, months-long gaps included, over-forecast by about 7%
+on one fold, which is why runs over 14 days are no longer flagged.
 
 ## 4. One evaluation procedure
 

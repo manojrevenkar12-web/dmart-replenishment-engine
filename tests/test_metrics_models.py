@@ -96,3 +96,16 @@ def test_gate_rejects_noise_and_promotes_real_gain(rng):
     assert not gate.decide(champ, noise, rules)["promote"]
     d = gate.decide(champ, better, rules)
     assert d["promote"] and d["bootstrap"]["ci95"][1] < 0
+
+
+def test_calibration_does_not_turn_a_level_shift_into_noise(rng):
+    """Demand jumps from ~6 to ~28 a day: last month's forecast was 4.7x too low, but the
+    dispersion around the new level is what this month's safety stock needs."""
+    from dre.evaluation.backtest import calibrate
+
+    n, h = 200, 28
+    actual = rng.poisson(28.0, (n, h)).astype(float)
+    prev = Forecast(np.full((n, h), 6.0), np.zeros((n, h)), 0, "prev")
+    new = Forecast(np.full((n, h), 28.0), np.zeros((n, h)), 28, "new")
+    a = calibrate(new, prev, actual, np.zeros(n, int)).alpha
+    assert np.median(a) < 0.05

@@ -53,8 +53,14 @@ class ModelResult:
 
 
 def calibrate(fc: Forecast, prev: Forecast, actual: np.ndarray, groups: np.ndarray) -> Forecast:
-    """Replace the dispersion with the one implied by the previous fold's out-of-sample errors."""
-    a = nb_alpha(actual, prev.mean, groups)
+    """Replace the dispersion with the one implied by the previous fold's out-of-sample errors.
+
+    Errors are measured around the previous forecast after removing its per-series bias: when an
+    item's demand level shifts (a new price, a listing change), last month's forecast was biased,
+    but the new forecast has already re-learned the level from recent data. Counting that bias as
+    noise would give the item absurd safety stock for a month."""
+    ratio = np.clip(np.nansum(actual, 1) / np.maximum(prev.mean.sum(1), 1e-9), 0.25, 4.0)
+    a = nb_alpha(actual, prev.mean * ratio[:, None], groups)
     return Forecast(fc.mean, np.repeat(a[:, None], fc.mean.shape[1], 1), fc.origin, fc.model)
 
 
