@@ -74,6 +74,8 @@ def write(r: dict, bt: pd.DataFrame, path: Path) -> None:
     for i, (n, v) in enumerate(pol.items()):
         a = v["all"]
         ax.scatter(a["avg_inventory_capital"] / 1000, a["margin_after_waste"] / 1000, s=40, color=SERIES[i % len(SERIES)], zorder=3)
+        if "penalty" in n or (n.startswith("perishable") and not n.endswith(f"[{champ}]")):
+            continue  # close to the champion's perishable point; listed in the table below
         ax.annotate(
             short(n, champ),
             (a["avg_inventory_capital"] / 1000, a["margin_after_waste"] / 1000),

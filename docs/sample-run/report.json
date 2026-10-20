@@ -1,0 +1,1160 @@
+{
+  "generated": "2026-10-20T13:08:25+00:00",
+  "data": {
+    "series": 14370,
+    "stores": 10,
+    "items": 1437,
+    "days": 1969,
+    "units_sold": 46749536,
+    "first_day": "2011-01-29",
+    "last_day": "2016-06-19"
+  },
+  "config": {
+    "folds": [
+      1884,
+      1912,
+      1940
+    ],
+    "warmup": 1856,
+    "horizon": 28,
+    "fast": false
+  },
+  "backtest": {
+    "seasonal_naive": {
+      "wrmsse": 0.9312,
+      "wspl": 0.3949,
+      "coverage_50": 0.6578,
+      "coverage_95": 0.7942,
+      "bias": -0.0406,
+      "wape": 0.82,
+      "wape_day1_7": 0.8137,
+      "fit_seconds": 8.6,
+      "train": {}
+    },
+    "moving_average": {
+      "wrmsse": 0.7521,
+      "wspl": 0.2764,
+      "coverage_50": 0.7425,
+      "coverage_95": 0.9551,
+      "bias": -0.0145,
+      "wape": 0.6827,
+      "wape_day1_7": 0.6742,
+      "fit_seconds": 8.9667,
+      "train": {}
+    },
+    "tsb": {
+      "wrmsse": 1.0698,
+      "wspl": 0.2894,
+      "coverage_50": 0.737,
+      "coverage_95": 0.9599,
+      "bias": 0.0003,
+      "wape": 0.6923,
+      "wape_day1_7": 0.6863,
+      "fit_seconds": 8.1667,
+      "train": {}
+    },
+    "lightgbm_demand": {
+      "wrmsse": 0.5863,
+      "wspl": 0.2734,
+      "coverage_50": 0.7509,
+      "coverage_95": 0.9657,
+      "bias": -0.0141,
+      "wape": 0.6688,
+      "wape_day1_7": 0.6478,
+      "fit_seconds": 287.5333,
+      "train": {
+        "train_rows": 5151677,
+        "train_seconds": 249.1,
+        "censored_rows_dropped": 59865
+      }
+    },
+    "torch_nb": {
+      "wrmsse": 0.568,
+      "wspl": 0.2712,
+      "coverage_50": 0.7573,
+      "coverage_95": 0.9676,
+      "bias": 0.0078,
+      "wape": 0.6729,
+      "wape_day1_7": 0.6503,
+      "fit_seconds": 77.1333,
+      "train": {
+        "train_rows": 5211542,
+        "train_seconds": 70.0,
+        "epoch_nll": [
+          1.3736,
+          1.3399
+        ]
+      }
+    },
+    "torch_nb_demand": {
+      "wrmsse": 0.5855,
+      "wspl": 0.2712,
+      "coverage_50": 0.7577,
+      "coverage_95": 0.9682,
+      "bias": 0.0215,
+      "wape": 0.6753,
+      "wape_day1_7": 0.6521,
+      "fit_seconds": 74.8667,
+      "train": {
+        "train_rows": 5151677,
+        "train_seconds": 67.5,
+        "epoch_nll": [
+          1.3761,
+          1.3414
+        ]
+      }
+    }
+  },
+  "levels": {
+    "seasonal_naive": {
+      "total": 0.7285,
+      "state": 0.8127,
+      "store": 0.8703,
+      "category": 0.7285,
+      "department": 0.9337,
+      "state_category": 0.8127,
+      "state_department": 0.9615,
+      "store_category": 0.8703,
+      "store_department": 0.9918,
+      "item": 1.1589,
+      "item_state": 1.1596,
+      "item_store": 1.1464
+    },
+    "moving_average": {
+      "total": 0.5982,
+      "state": 0.6579,
+      "store": 0.7063,
+      "category": 0.5982,
+      "department": 0.7292,
+      "state_category": 0.6579,
+      "state_department": 0.7652,
+      "store_category": 0.7063,
+      "store_department": 0.8013,
+      "item": 0.9677,
+      "item_state": 0.939,
+      "item_store": 0.8984
+    },
+    "tsb": {
+      "total": 1.0826,
+      "state": 1.076,
+      "store": 1.0723,
+      "category": 1.0826,
+      "department": 1.189,
+      "state_category": 1.076,
+      "state_department": 1.1518,
+      "store_category": 1.0723,
+      "store_department": 1.1211,
+      "item": 1.0312,
+      "item_state": 0.9711,
+      "item_store": 0.9111
+    },
+    "lightgbm_demand": {
+      "total": 0.3885,
+      "state": 0.4409,
+      "store": 0.512,
+      "category": 0.3885,
+      "department": 0.4975,
+      "state_category": 0.4409,
+      "state_department": 0.5447,
+      "store_category": 0.512,
+      "store_department": 0.6137,
+      "item": 0.9164,
+      "item_state": 0.9043,
+      "item_store": 0.8761
+    },
+    "torch_nb": {
+      "total": 0.3485,
+      "state": 0.4195,
+      "store": 0.4956,
+      "category": 0.3485,
+      "department": 0.4637,
+      "state_category": 0.4195,
+      "state_department": 0.5281,
+      "store_category": 0.4956,
+      "store_department": 0.6026,
+      "item": 0.9186,
+      "item_state": 0.9016,
+      "item_store": 0.8737
+    },
+    "torch_nb_demand": {
+      "total": 0.3866,
+      "state": 0.4421,
+      "store": 0.5094,
+      "category": 0.3866,
+      "department": 0.4931,
+      "state_category": 0.4421,
+      "state_department": 0.5467,
+      "store_category": 0.5094,
+      "store_department": 0.6138,
+      "item": 0.9196,
+      "item_state": 0.9023,
+      "item_store": 0.8739
+    }
+  },
+  "gate": [
+    {
+      "champion": "moving_average",
+      "challenger": "torch_nb",
+      "wrmsse": {
+        "moving_average": 0.7521,
+        "torch_nb": 0.568
+      },
+      "wspl": {
+        "moving_average": 0.2764,
+        "torch_nb": 0.2712
+      },
+      "bias": {
+        "moving_average": -0.0145,
+        "torch_nb": 0.0078
+      },
+      "fold_wins": "3/3",
+      "bootstrap": {
+        "weighted_rmsse_diff": -0.02473,
+        "ci95": [
+          -0.02942,
+          -0.02052
+        ],
+        "series": 43110
+      },
+      "checks": {
+        "lower_wrmsse": true,
+        "significant": true,
+        "wspl_ok": true,
+        "bias_ok": true,
+        "consistent": true
+      },
+      "promote": true
+    },
+    {
+      "champion": "torch_nb",
+      "challenger": "torch_nb_demand",
+      "wrmsse": {
+        "torch_nb": 0.568,
+        "torch_nb_demand": 0.5855
+      },
+      "wspl": {
+        "torch_nb": 0.2712,
+        "torch_nb_demand": 0.2712
+      },
+      "bias": {
+        "torch_nb": 0.0078,
+        "torch_nb_demand": 0.0215
+      },
+      "fold_wins": "1/3",
+      "bootstrap": {
+        "weighted_rmsse_diff": 0.00021,
+        "ci95": [
+          -0.00129,
+          0.00163
+        ],
+        "series": 43110
+      },
+      "checks": {
+        "lower_wrmsse": false,
+        "significant": false,
+        "wspl_ok": true,
+        "bias_ok": false,
+        "consistent": false
+      },
+      "promote": false
+    },
+    {
+      "champion": "torch_nb",
+      "challenger": "lightgbm_demand",
+      "wrmsse": {
+        "torch_nb": 0.568,
+        "lightgbm_demand": 0.5863
+      },
+      "wspl": {
+        "torch_nb": 0.2712,
+        "lightgbm_demand": 0.2734
+      },
+      "bias": {
+        "torch_nb": 0.0078,
+        "lightgbm_demand": -0.0141
+      },
+      "fold_wins": "1/3",
+      "bootstrap": {
+        "weighted_rmsse_diff": 0.00239,
+        "ci95": [
+          -0.00221,
+          0.0073
+        ],
+        "series": 43110
+      },
+      "checks": {
+        "lower_wrmsse": false,
+        "significant": false,
+        "wspl_ok": true,
+        "bias_ok": true,
+        "consistent": false
+      },
+      "promote": false
+    },
+    {
+      "champion": "torch_nb",
+      "challenger": "seasonal_naive",
+      "wrmsse": {
+        "torch_nb": 0.568,
+        "seasonal_naive": 0.9312
+      },
+      "wspl": {
+        "torch_nb": 0.2712,
+        "seasonal_naive": 0.3949
+      },
+      "bias": {
+        "torch_nb": 0.0078,
+        "seasonal_naive": -0.0406
+      },
+      "fold_wins": "0/3",
+      "bootstrap": {
+        "weighted_rmsse_diff": 0.2727,
+        "ci95": [
+          0.26439,
+          0.28063
+        ],
+        "series": 43110
+      },
+      "checks": {
+        "lower_wrmsse": false,
+        "significant": false,
+        "wspl_ok": false,
+        "bias_ok": false,
+        "consistent": false
+      },
+      "promote": false
+    },
+    {
+      "champion": "torch_nb",
+      "challenger": "tsb",
+      "wrmsse": {
+        "torch_nb": 0.568,
+        "tsb": 1.0698
+      },
+      "wspl": {
+        "torch_nb": 0.2712,
+        "tsb": 0.2894
+      },
+      "bias": {
+        "torch_nb": 0.0078,
+        "tsb": 0.0003
+      },
+      "fold_wins": "0/3",
+      "bootstrap": {
+        "weighted_rmsse_diff": 0.03738,
+        "ci95": [
+          0.03279,
+          0.04162
+        ],
+        "series": 43110
+      },
+      "checks": {
+        "lower_wrmsse": false,
+        "significant": false,
+        "wspl_ok": false,
+        "bias_ok": true,
+        "consistent": false
+      },
+      "promote": false
+    }
+  ],
+  "champion": "torch_nb",
+  "importance": {},
+  "replenishment": {
+    "start_date": "2016-05-23",
+    "days": 28,
+    "policies": {
+      "cover_days": {
+        "all": {
+          "fill_rate": 0.9068,
+          "lost_units": 77046,
+          "waste_units": 25647,
+          "waste_cost": 57709.0,
+          "waste_share_of_cogs": 0.0423,
+          "avg_inventory_capital": 190772.0,
+          "margin_after_waste": 527559.0,
+          "stockout_item_days_share": 0.0552,
+          "inventory_turn_days": 3.91
+        },
+        "fresh": {
+          "fill_rate": 0.9522,
+          "lost_units": 4716,
+          "waste_units": 21444,
+          "waste_cost": 45421.0,
+          "waste_share_of_cogs": 0.2499,
+          "avg_inventory_capital": 16114.0,
+          "margin_after_waste": 32490.0,
+          "stockout_item_days_share": 0.0365,
+          "inventory_turn_days": 2.48
+        },
+        "chilled": {
+          "fill_rate": 0.9351,
+          "lost_units": 10239,
+          "waste_units": 4203,
+          "waste_cost": 12288.0,
+          "waste_share_of_cogs": 0.0345,
+          "avg_inventory_capital": 44071.0,
+          "margin_after_waste": 140476.0,
+          "stockout_item_days_share": 0.0471,
+          "inventory_turn_days": 3.46
+        },
+        "ambient": {
+          "fill_rate": 0.8912,
+          "lost_units": 62091,
+          "waste_units": 0,
+          "waste_cost": 0.0,
+          "waste_share_of_cogs": 0.0,
+          "avg_inventory_capital": 130587.0,
+          "margin_after_waste": 354593.0,
+          "stockout_item_days_share": 0.064,
+          "inventory_turn_days": 4.42
+        }
+      },
+      "newsvendor[moving_average]": {
+        "all": {
+          "fill_rate": 0.9273,
+          "lost_units": 60154,
+          "waste_units": 36668,
+          "waste_cost": 87813.0,
+          "waste_share_of_cogs": 0.0627,
+          "avg_inventory_capital": 237583.0,
+          "margin_after_waste": 512463.0,
+          "stockout_item_days_share": 0.0355,
+          "inventory_turn_days": 4.75
+        },
+        "fresh": {
+          "fill_rate": 0.9645,
+          "lost_units": 3499,
+          "waste_units": 27010,
+          "waste_cost": 60258.0,
+          "waste_share_of_cogs": 0.3259,
+          "avg_inventory_capital": 17649.0,
+          "margin_after_waste": 18994.0,
+          "stockout_item_days_share": 0.0247,
+          "inventory_turn_days": 2.67
+        },
+        "chilled": {
+          "fill_rate": 0.9659,
+          "lost_units": 5380,
+          "waste_units": 9658,
+          "waste_cost": 27554.0,
+          "waste_share_of_cogs": 0.0745,
+          "avg_inventory_capital": 60135.0,
+          "margin_after_waste": 130906.0,
+          "stockout_item_days_share": 0.0234,
+          "inventory_turn_days": 4.55
+        },
+        "ambient": {
+          "fill_rate": 0.9101,
+          "lost_units": 51275,
+          "waste_units": 0,
+          "waste_cost": 0.0,
+          "waste_share_of_cogs": 0.0,
+          "avg_inventory_capital": 159799.0,
+          "margin_after_waste": 362563.0,
+          "stockout_item_days_share": 0.0443,
+          "inventory_turn_days": 5.29
+        }
+      },
+      "newsvendor[torch_nb]": {
+        "all": {
+          "fill_rate": 0.9296,
+          "lost_units": 58247,
+          "waste_units": 40478,
+          "waste_cost": 93446.0,
+          "waste_share_of_cogs": 0.0665,
+          "avg_inventory_capital": 237909.0,
+          "margin_after_waste": 508667.0,
+          "stockout_item_days_share": 0.0331,
+          "inventory_turn_days": 4.74
+        },
+        "fresh": {
+          "fill_rate": 0.9711,
+          "lost_units": 2853,
+          "waste_units": 30597,
+          "waste_cost": 65760.0,
+          "waste_share_of_cogs": 0.3533,
+          "avg_inventory_capital": 18932.0,
+          "margin_after_waste": 14016.0,
+          "stockout_item_days_share": 0.0191,
+          "inventory_turn_days": 2.85
+        },
+        "chilled": {
+          "fill_rate": 0.9724,
+          "lost_units": 4354,
+          "waste_units": 9881,
+          "waste_cost": 27685.0,
+          "waste_share_of_cogs": 0.0744,
+          "avg_inventory_capital": 61793.0,
+          "margin_after_waste": 131798.0,
+          "stockout_item_days_share": 0.02,
+          "inventory_turn_days": 4.65
+        },
+        "ambient": {
+          "fill_rate": 0.9106,
+          "lost_units": 51040,
+          "waste_units": 0,
+          "waste_cost": 0.0,
+          "waste_share_of_cogs": 0.0,
+          "avg_inventory_capital": 157183.0,
+          "margin_after_waste": 362852.0,
+          "stockout_item_days_share": 0.0432,
+          "inventory_turn_days": 5.2
+        }
+      },
+      "perishable_newsvendor[moving_average]": {
+        "all": {
+          "fill_rate": 0.9035,
+          "lost_units": 79807,
+          "waste_units": 11451,
+          "waste_cost": 26761.0,
+          "waste_share_of_cogs": 0.0198,
+          "avg_inventory_capital": 212366.0,
+          "margin_after_waste": 553087.0,
+          "stockout_item_days_share": 0.0618,
+          "inventory_turn_days": 4.39
+        },
+        "fresh": {
+          "fill_rate": 0.8282,
+          "lost_units": 16947,
+          "waste_units": 7200,
+          "waste_cost": 14999.0,
+          "waste_share_of_cogs": 0.097,
+          "avg_inventory_capital": 7860.0,
+          "margin_after_waste": 51276.0,
+          "stockout_item_days_share": 0.1378,
+          "inventory_turn_days": 1.42
+        },
+        "chilled": {
+          "fill_rate": 0.9273,
+          "lost_units": 11477,
+          "waste_units": 4251,
+          "waste_cost": 11761.0,
+          "waste_share_of_cogs": 0.0334,
+          "avg_inventory_capital": 44850.0,
+          "margin_after_waste": 139351.0,
+          "stockout_item_days_share": 0.0561,
+          "inventory_turn_days": 3.56
+        },
+        "ambient": {
+          "fill_rate": 0.91,
+          "lost_units": 51383,
+          "waste_units": 0,
+          "waste_cost": 0.0,
+          "waste_share_of_cogs": 0.0,
+          "avg_inventory_capital": 159655.0,
+          "margin_after_waste": 362460.0,
+          "stockout_item_days_share": 0.0446,
+          "inventory_turn_days": 5.29
+        }
+      },
+      "perishable_newsvendor[torch_nb]": {
+        "all": {
+          "fill_rate": 0.9103,
+          "lost_units": 74188,
+          "waste_units": 12322,
+          "waste_cost": 28966.0,
+          "waste_share_of_cogs": 0.0212,
+          "avg_inventory_capital": 213122.0,
+          "margin_after_waste": 556824.0,
+          "stockout_item_days_share": 0.0545,
+          "inventory_turn_days": 4.37
+        },
+        "fresh": {
+          "fill_rate": 0.849,
+          "lost_units": 14890,
+          "waste_units": 7643,
+          "waste_cost": 16105.0,
+          "waste_share_of_cogs": 0.1013,
+          "avg_inventory_capital": 8328.0,
+          "margin_after_waste": 52053.0,
+          "stockout_item_days_share": 0.1216,
+          "inventory_turn_days": 1.47
+        },
+        "chilled": {
+          "fill_rate": 0.9477,
+          "lost_units": 8249,
+          "waste_units": 4679,
+          "waste_cost": 12861.0,
+          "waste_share_of_cogs": 0.0356,
+          "avg_inventory_capital": 47832.0,
+          "margin_after_waste": 141930.0,
+          "stockout_item_days_share": 0.0413,
+          "inventory_turn_days": 3.71
+        },
+        "ambient": {
+          "fill_rate": 0.9105,
+          "lost_units": 51049,
+          "waste_units": 0,
+          "waste_cost": 0.0,
+          "waste_share_of_cogs": 0.0,
+          "avg_inventory_capital": 156961.0,
+          "margin_after_waste": 362841.0,
+          "stockout_item_days_share": 0.0432,
+          "inventory_turn_days": 5.19
+        }
+      },
+      "perishable_newsvendor_penalty_0.6[torch_nb]": {
+        "all": {
+          "fill_rate": 0.9165,
+          "lost_units": 69054,
+          "waste_units": 15522,
+          "waste_cost": 36534.0,
+          "waste_share_of_cogs": 0.0265,
+          "avg_inventory_capital": 218232.0,
+          "margin_after_waste": 554486.0,
+          "stockout_item_days_share": 0.0475,
+          "inventory_turn_days": 4.43
+        },
+        "fresh": {
+          "fill_rate": 0.8864,
+          "lost_units": 11206,
+          "waste_units": 9938,
+          "waste_cost": 21199.0,
+          "waste_share_of_cogs": 0.1268,
+          "avg_inventory_capital": 9830.0,
+          "margin_after_waste": 50436.0,
+          "stockout_item_days_share": 0.0899,
+          "inventory_turn_days": 1.65
+        },
+        "chilled": {
+          "fill_rate": 0.9569,
+          "lost_units": 6806,
+          "waste_units": 5584,
+          "waste_cost": 15336.0,
+          "waste_share_of_cogs": 0.042,
+          "avg_inventory_capital": 51295.0,
+          "margin_after_waste": 141201.0,
+          "stockout_item_days_share": 0.0332,
+          "inventory_turn_days": 3.93
+        },
+        "ambient": {
+          "fill_rate": 0.9106,
+          "lost_units": 51042,
+          "waste_units": 0,
+          "waste_cost": 0.0,
+          "waste_share_of_cogs": 0.0,
+          "avg_inventory_capital": 157108.0,
+          "margin_after_waste": 362849.0,
+          "stockout_item_days_share": 0.0432,
+          "inventory_turn_days": 5.2
+        }
+      },
+      "capital_cap_3d_proportional[torch_nb]": {
+        "all": {
+          "fill_rate": 0.6536,
+          "lost_units": 286511,
+          "waste_units": 10653,
+          "waste_cost": 24964.0,
+          "waste_share_of_cogs": 0.0244,
+          "avg_inventory_capital": 89088.0,
+          "margin_after_waste": 414397.0,
+          "stockout_item_days_share": 0.161,
+          "inventory_turn_days": 2.43
+        },
+        "fresh": {
+          "fill_rate": 0.7967,
+          "lost_units": 20050,
+          "waste_units": 6603,
+          "waste_cost": 13851.0,
+          "waste_share_of_cogs": 0.0933,
+          "avg_inventory_capital": 7128.0,
+          "margin_after_waste": 49786.0,
+          "stockout_item_days_share": 0.1574,
+          "inventory_turn_days": 1.34
+        },
+        "chilled": {
+          "fill_rate": 0.9136,
+          "lost_units": 13634,
+          "waste_units": 4050,
+          "waste_cost": 11113.0,
+          "waste_share_of_cogs": 0.032,
+          "avg_inventory_capital": 41345.0,
+          "margin_after_waste": 137879.0,
+          "stockout_item_days_share": 0.0626,
+          "inventory_turn_days": 3.33
+        },
+        "ambient": {
+          "fill_rate": 0.557,
+          "lost_units": 252827,
+          "waste_units": 0,
+          "waste_cost": 0.0,
+          "waste_share_of_cogs": 0.0,
+          "avg_inventory_capital": 40615.0,
+          "margin_after_waste": 226732.0,
+          "stockout_item_days_share": 0.2094,
+          "inventory_turn_days": 2.15
+        },
+        "milp": {
+          "solves": 0,
+          "seconds": 0.0
+        }
+      },
+      "capital_cap_3d_milp[torch_nb]": {
+        "all": {
+          "fill_rate": 0.7487,
+          "lost_units": 207865,
+          "waste_units": 10094,
+          "waste_cost": 23853.0,
+          "waste_share_of_cogs": 0.0211,
+          "avg_inventory_capital": 96043.0,
+          "margin_after_waste": 459862.0,
+          "stockout_item_days_share": 0.1459,
+          "inventory_turn_days": 2.38
+        },
+        "fresh": {
+          "fill_rate": 0.7948,
+          "lost_units": 20239,
+          "waste_units": 6477,
+          "waste_cost": 13658.0,
+          "waste_share_of_cogs": 0.0921,
+          "avg_inventory_capital": 6966.0,
+          "margin_after_waste": 49919.0,
+          "stockout_item_days_share": 0.1561,
+          "inventory_turn_days": 1.31
+        },
+        "chilled": {
+          "fill_rate": 0.9099,
+          "lost_units": 14220,
+          "waste_units": 3617,
+          "waste_cost": 10195.0,
+          "waste_share_of_cogs": 0.0294,
+          "avg_inventory_capital": 37621.0,
+          "margin_after_waste": 138499.0,
+          "stockout_item_days_share": 0.0642,
+          "inventory_turn_days": 3.04
+        },
+        "ambient": {
+          "fill_rate": 0.6961,
+          "lost_units": 173406,
+          "waste_units": 0,
+          "waste_cost": 0.0,
+          "waste_share_of_cogs": 0.0,
+          "avg_inventory_capital": 51456.0,
+          "margin_after_waste": 271445.0,
+          "stockout_item_days_share": 0.1828,
+          "inventory_turn_days": 2.27
+        },
+        "milp": {
+          "solves": 109,
+          "seconds": 151.9
+        }
+      },
+      "capital_cap_4d_proportional[torch_nb]": {
+        "all": {
+          "fill_rate": 0.7918,
+          "lost_units": 172169,
+          "waste_units": 10754,
+          "waste_cost": 25169.0,
+          "waste_share_of_cogs": 0.0208,
+          "avg_inventory_capital": 126640.0,
+          "margin_after_waste": 493228.0,
+          "stockout_item_days_share": 0.1016,
+          "inventory_turn_days": 2.93
+        },
+        "fresh": {
+          "fill_rate": 0.8093,
+          "lost_units": 18808,
+          "waste_units": 6678,
+          "waste_cost": 13945.0,
+          "waste_share_of_cogs": 0.0924,
+          "avg_inventory_capital": 7254.0,
+          "margin_after_waste": 50706.0,
+          "stockout_item_days_share": 0.1507,
+          "inventory_turn_days": 1.35
+        },
+        "chilled": {
+          "fill_rate": 0.9268,
+          "lost_units": 11548,
+          "waste_units": 4076,
+          "waste_cost": 11224.0,
+          "waste_share_of_cogs": 0.0318,
+          "avg_inventory_capital": 42402.0,
+          "margin_after_waste": 139897.0,
+          "stockout_item_days_share": 0.0558,
+          "inventory_turn_days": 3.37
+        },
+        "ambient": {
+          "fill_rate": 0.7515,
+          "lost_units": 141813,
+          "waste_units": 0,
+          "waste_cost": 0.0,
+          "waste_share_of_cogs": 0.0,
+          "avg_inventory_capital": 76984.0,
+          "margin_after_waste": 302625.0,
+          "stockout_item_days_share": 0.1109,
+          "inventory_turn_days": 3.05
+        },
+        "milp": {
+          "solves": 0,
+          "seconds": 0.0
+        }
+      },
+      "capital_cap_4d_milp[torch_nb]": {
+        "all": {
+          "fill_rate": 0.8473,
+          "lost_units": 126315,
+          "waste_units": 10664,
+          "waste_cost": 25159.0,
+          "waste_share_of_cogs": 0.0197,
+          "avg_inventory_capital": 136123.0,
+          "margin_after_waste": 521446.0,
+          "stockout_item_days_share": 0.0884,
+          "inventory_turn_days": 2.99
+        },
+        "fresh": {
+          "fill_rate": 0.817,
+          "lost_units": 18051,
+          "waste_units": 6774,
+          "waste_cost": 14244.0,
+          "waste_share_of_cogs": 0.0932,
+          "avg_inventory_capital": 7254.0,
+          "margin_after_waste": 51226.0,
+          "stockout_item_days_share": 0.142,
+          "inventory_turn_days": 1.33
+        },
+        "chilled": {
+          "fill_rate": 0.9301,
+          "lost_units": 11024,
+          "waste_units": 3890,
+          "waste_cost": 10915.0,
+          "waste_share_of_cogs": 0.0308,
+          "avg_inventory_capital": 40947.0,
+          "margin_after_waste": 141126.0,
+          "stockout_item_days_share": 0.0519,
+          "inventory_turn_days": 3.23
+        },
+        "ambient": {
+          "fill_rate": 0.8296,
+          "lost_units": 97240,
+          "waste_units": 0,
+          "waste_cost": 0.0,
+          "waste_share_of_cogs": 0.0,
+          "avg_inventory_capital": 87923.0,
+          "margin_after_waste": 329094.0,
+          "stockout_item_days_share": 0.092,
+          "inventory_turn_days": 3.21
+        },
+        "milp": {
+          "solves": 104,
+          "seconds": 117.7
+        }
+      },
+      "oracle": {
+        "all": {
+          "fill_rate": 0.9414,
+          "lost_units": 48442,
+          "waste_units": 1658,
+          "waste_cost": 4215.0,
+          "waste_share_of_cogs": 0.003,
+          "avg_inventory_capital": 63872.0,
+          "margin_after_waste": 605567.0,
+          "stockout_item_days_share": 0.0271,
+          "inventory_turn_days": 1.26
+        },
+        "fresh": {
+          "fill_rate": 0.9902,
+          "lost_units": 967,
+          "waste_units": 1260,
+          "waste_cost": 2839.0,
+          "waste_share_of_cogs": 0.0149,
+          "avg_inventory_capital": 1597.0,
+          "margin_after_waste": 78655.0,
+          "stockout_item_days_share": 0.0071,
+          "inventory_turn_days": 0.24
+        },
+        "chilled": {
+          "fill_rate": 0.9807,
+          "lost_units": 3038,
+          "waste_units": 398,
+          "waste_cost": 1376.0,
+          "waste_share_of_cogs": 0.0037,
+          "avg_inventory_capital": 13583.0,
+          "margin_after_waste": 159471.0,
+          "stockout_item_days_share": 0.0142,
+          "inventory_turn_days": 1.01
+        },
+        "ambient": {
+          "fill_rate": 0.9221,
+          "lost_units": 44437,
+          "waste_units": 0,
+          "waste_cost": 0.0,
+          "waste_share_of_cogs": 0.0,
+          "avg_inventory_capital": 48691.0,
+          "margin_after_waste": 367441.0,
+          "stockout_item_days_share": 0.0385,
+          "inventory_turn_days": 1.59
+        }
+      }
+    },
+    "assumptions": {
+      "gross_margin": 0.3,
+      "holding_rate_per_day": 0.001,
+      "capacity_days_of_sales": 10,
+      "capacity_min_packs": 2,
+      "zone_of_department": {
+        "fresh": [
+          "FOODS_1"
+        ],
+        "chilled": [
+          "FOODS_2"
+        ],
+        "ambient": [
+          "FOODS_3"
+        ]
+      },
+      "zones": {
+        "fresh": {
+          "shelf_life_days": 4,
+          "delivery_weekdays": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ]
+        },
+        "chilled": {
+          "shelf_life_days": 10,
+          "delivery_weekdays": [
+            0,
+            2,
+            4
+          ]
+        },
+        "ambient": {
+          "shelf_life_days": 60,
+          "delivery_weekdays": [
+            0,
+            3
+          ]
+        }
+      },
+      "stockout_penalty_share": 0.2,
+      "min_service": 0.5,
+      "max_service": 0.98,
+      "cover_days_safety": 2,
+      "capital_caps_days": [
+        3,
+        4
+      ]
+    }
+  },
+  "censoring_experiment": {
+    "store": "CA_3",
+    "eligible_items": 909,
+    "detection": {
+      "planted_days": 23939,
+      "planted_days_flagged": 0.5362,
+      "planted_episodes_with_any_flag": 0.487,
+      "share_of_eligible_sales_removed": 0.088
+    },
+    "forecast": {
+      "clean history": {
+        "bias_eligible_items": -0.0593,
+        "wape_eligible_items": 0.6501
+      },
+      "damaged, censored days kept": {
+        "bias_eligible_items": -0.1314,
+        "wape_eligible_items": 0.6542
+      },
+      "damaged, censored days masked": {
+        "bias_eligible_items": -0.0599,
+        "wape_eligible_items": 0.6539
+      }
+    }
+  },
+  "monitoring": {
+    "data_checks": {
+      "missing_sales_values": 0,
+      "negative_sales_values": 0,
+      "items_listed_without_price": 0,
+      "stockout_flag_share_last_28d": 0.01,
+      "stockout_flag_share_prior_year": 0.0114
+    },
+    "drift": {
+      "mean_28": {
+        "psi": 0.0408,
+        "status": "green"
+      },
+      "zero_share_28": {
+        "psi": 0.0338,
+        "status": "green"
+      },
+      "stockout_share_28": {
+        "psi": 0.0,
+        "status": "green"
+      },
+      "price": {
+        "psi": 0.0002,
+        "status": "green"
+      },
+      "price_vs_origin": {
+        "psi": 0.0,
+        "status": "green"
+      },
+      "days_since_sale": {
+        "psi": 0.0411,
+        "status": "green"
+      }
+    },
+    "alerts": [
+      {
+        "group": "CA_3",
+        "kind": "bias",
+        "value": 0.0621,
+        "threshold": 0.05
+      },
+      {
+        "group": "CA_4",
+        "kind": "wape",
+        "value": 0.844,
+        "threshold": 0.8075
+      },
+      {
+        "group": "WI_2",
+        "kind": "bias",
+        "value": 0.0668,
+        "threshold": 0.05
+      },
+      {
+        "group": "FOODS_1",
+        "kind": "bias",
+        "value": 0.0522,
+        "threshold": 0.05
+      },
+      {
+        "group": "FOODS_2",
+        "kind": "bias",
+        "value": 0.0762,
+        "threshold": 0.05
+      }
+    ]
+  },
+  "explanations": [
+    {
+      "drivers": {
+        "item_id": "FOODS_3_120",
+        "store_id": "CA_1",
+        "order_units": 144.0,
+        "order_packs": 6.0,
+        "pack": 24.0,
+        "protection_days": 3.0,
+        "forecast_units": 130.2,
+        "target_units": 189.0,
+        "service_level": 0.98,
+        "on_hand_units": 65.0,
+        "expiring_units": 0.0,
+        "price_change_pct": 0.0,
+        "event": "",
+        "capped_by_shelf": false,
+        "shelf_life_days": 60.0
+      },
+      "explanation": {
+        "text": "Order 144 units (6 \u00d7 24) of FOODS_3_120 for CA_1. Demand until the next delivery (3 days) is forecast at 130.2 units; we stock to 189 units to meet 98% of demand. 65 units are on hand.",
+        "source": "template",
+        "rejected_reason": null
+      }
+    },
+    {
+      "drivers": {
+        "item_id": "FOODS_3_444",
+        "store_id": "CA_1",
+        "order_units": 120.0,
+        "order_packs": 10.0,
+        "pack": 12.0,
+        "protection_days": 3.0,
+        "forecast_units": 42.0,
+        "target_units": 179.0,
+        "service_level": 0.93,
+        "on_hand_units": 22.0,
+        "expiring_units": 0.0,
+        "price_change_pct": 0.0,
+        "event": "",
+        "capped_by_shelf": true,
+        "shelf_life_days": 60.0
+      },
+      "explanation": {
+        "text": "Order 120 units (10 \u00d7 12) of FOODS_3_444 for CA_1. Demand until the next delivery (3 days) is forecast at 42.0 units; we stock to 179 units to meet 93% of demand. 22 units are on hand. The order is limited by shelf capacity.",
+        "source": "template",
+        "rejected_reason": null
+      }
+    },
+    {
+      "drivers": {
+        "item_id": "FOODS_3_090",
+        "store_id": "CA_1",
+        "order_units": 96.0,
+        "order_packs": 4.0,
+        "pack": 24.0,
+        "protection_days": 3.0,
+        "forecast_units": 121.4,
+        "target_units": 179.0,
+        "service_level": 0.98,
+        "on_hand_units": 88.0,
+        "expiring_units": 4.8,
+        "price_change_pct": 0.0,
+        "event": "",
+        "capped_by_shelf": false,
+        "shelf_life_days": 60.0
+      },
+      "explanation": {
+        "text": "Order 96 units (4 \u00d7 24) of FOODS_3_090 for CA_1. Demand until the next delivery (3 days) is forecast at 121.4 units; we stock to 179 units to meet 98% of demand. 4.8 of the 88 units on hand are expected to expire before they sell, so they are not counted.",
+        "source": "template",
+        "rejected_reason": null
+      }
+    },
+    {
+      "drivers": {
+        "item_id": "FOODS_3_090",
+        "store_id": "CA_1",
+        "order_units": 96.0,
+        "order_packs": 4.0,
+        "pack": 24.0,
+        "protection_days": 3.0,
+        "forecast_units": 121.4,
+        "target_units": 179.0,
+        "service_level": 0.98,
+        "on_hand_units": 88.0,
+        "expiring_units": 4.8,
+        "price_change_pct": 0.0,
+        "event": "",
+        "capped_by_shelf": false,
+        "shelf_life_days": 60.0
+      },
+      "explanation": {
+        "text": "Order 96 units (4 \u00d7 24) of FOODS_3_090 for CA_1. Demand until the next delivery (3 days) is forecast at 121.4 units; we stock to 179 units to meet 98% of demand. 4.8 of the 88 units on hand are expected to expire before they sell, so they are not counted.",
+        "source": "template",
+        "rejected_reason": null
+      }
+    },
+    {
+      "drivers": {
+        "item_id": "FOODS_3_566",
+        "store_id": "CA_1",
+        "order_units": 72.0,
+        "order_packs": 3.0,
+        "pack": 24.0,
+        "protection_days": 3.0,
+        "forecast_units": 53.7,
+        "target_units": 94.0,
+        "service_level": 0.98,
+        "on_hand_units": 40.0,
+        "expiring_units": 4.6,
+        "price_change_pct": 0.0,
+        "event": "",
+        "capped_by_shelf": false,
+        "shelf_life_days": 60.0
+      },
+      "explanation": {
+        "text": "Order 72 units (3 \u00d7 24) of FOODS_3_566 for CA_1. Demand until the next delivery (3 days) is forecast at 53.7 units; we stock to 94 units to meet 98% of demand. 4.6 of the 40 units on hand are expected to expire before they sell, so they are not counted.",
+        "source": "template",
+        "rejected_reason": null
+      }
+    }
+  ],
+  "registry": "out/registry/torch_nb-20261020T130824",
+  "runtime_minutes": 64.2
+}
